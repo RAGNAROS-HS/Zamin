@@ -1,0 +1,13 @@
+core concepts:
+
+dataset:  Kaggle Boston Housing
+
+
+error functions: Mean Square, Absolute Mean
+
+
+fitting methods: compare OLS and Ridge. These are for calculating the coefficients
+
+
+potential improvements: feature engineering
+
