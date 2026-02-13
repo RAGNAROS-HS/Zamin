@@ -10,17 +10,8 @@ data = pd.read_csv("housing.csv", header=None, delimiter=r"\s+", names=column_na
 #seaborn dataset visualization
 
 sns.set_theme()
-sns.displot(data=data, x="MEDV", kde=True)
+#for name in column_names:
+plt.figure(figsize=(12, 10))  # Width x height in inches
+sns.clustermap(data.corr(), annot=True, cmap='coolwarm', center=0, square=True)
 
-
-fig, axs = plt.subplots(ncols=7, nrows=2, figsize=(20,10))
-index = 0
-axs = axs.flatten()
-
-for k,v in data.items():
-    sns.distplot(v, ax=axs[index])
-    index = index + 1
-
-plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
-plt.show()
-#print(data)
+plt.savefig("corr_clustermap.png", dpi=600, bbox_inches='tight')
