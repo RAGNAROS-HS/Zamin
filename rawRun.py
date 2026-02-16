@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.decomposition import PCA
+from mpl_toolkits.mplot3d import Axes3D
+
 
 column_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
 data = pd.read_csv("housing.csv", header=None, delimiter=r"\s+", names=column_names)
@@ -81,3 +84,5 @@ axes[1,1].set_title('Residuals vs Predicted')
 plt.tight_layout()
 plt.savefig('gd_diagnostics.png', dpi=300, bbox_inches='tight')
 plt.show()
+
+
