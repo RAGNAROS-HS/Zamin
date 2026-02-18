@@ -41,7 +41,6 @@ def gradient_descent(X_train, y_train, X_test, y_test, alpha=0.001, epochs=1200,
         if epoch % 100 == 0:
             print(f"Epoch {epoch}: Train Loss = {loss:.4f}")
         
-        # Early stopping
         if epoch > 10 and abs(losses[-1] - losses[-2]) < tol:
             print(f"Converged at epoch {epoch}")
             break
@@ -60,7 +59,6 @@ def gradient_descent(X_train, y_train, X_test, y_test, alpha=0.001, epochs=1200,
     train_metrics = compute_metrics(y_train, np.dot(X_train, w) + b)
     test_metrics = compute_metrics(y_test, y_pred_test)
     
-    # Print weights and metrics
     feature_names = X.columns
     for name, weight in zip(feature_names, w):
         print(f"{name}: {weight:.4f}")
@@ -73,11 +71,9 @@ def gradient_descent(X_train, y_train, X_test, y_test, alpha=0.001, epochs=1200,
 
 w, b, losses, train_metrics, test_metrics = gradient_descent(X_train, y_train, X_test, y_test)
 
-# Test predictions (recompute for plotting)
-X_test_np = X_test.values  # Ensure numpy
+X_test_np = X_test.values  
 y_pred_test = np.dot(X_test_np, w) + b
 
-# Train loss plot
 plt.style.use('seaborn-v0_8-whitegrid')
 plt.figure(figsize=(10, 6))
 plt.plot(losses, linewidth=2.5, color='steelblue')
@@ -87,7 +83,6 @@ plt.ylabel('MSE')
 plt.savefig('gd_loss.png', dpi=300, bbox_inches='tight')
 plt.show()
 
-# Test scatter
 fig, ax = plt.subplots(figsize=(8, 6))
 ax.scatter(y_test, y_pred_test, alpha=0.6)
 ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
