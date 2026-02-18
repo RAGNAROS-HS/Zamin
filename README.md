@@ -171,15 +171,8 @@ Zamin/
 
 ## Key Takeaways
 
-1. **Linear regression via GD** achieves R² ≈ 0.67 — a solid baseline given the simplicity
-2. **The neural network** nearly doubles the explained variance (R² ≈ 0.83), capturing non-linear feature interactions
-3. **Z-score normalisation** is essential for gradient descent convergence with features on vastly different scales
-4. The largest predictors of house price are **RM** (rooms, +) and **LSTAT** (lower status %, −)
+redacted
 
 ## Future Work
 
-- [ ] Complete the evolutionary algorithm for neuroevolution
-- [ ] Add OLS and Ridge regression comparison (as noted in project plan)
-- [ ] Feature engineering (polynomial features, interaction terms)
-- [ ] Cross-validation for more robust metric estimates
-- [ ] Hyperparameter tuning (learning rate schedules, network architecture search)
+redacted
