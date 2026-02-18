@@ -121,12 +121,12 @@ Scaffolded in `EvolutionaryAlgorithm.py` — evolves neural network weights usin
 
 | Metric   | Gradient Descent (Linear) | Neural Network (Keras) |
 | -------- | :-----------------------: | :--------------------: |
-| **MSE**  |          ~24.29           |         ~12.72         |
-| **RMSE** |           ~4.93           |         ~3.57          |
-| **MAE**  |           ~3.44           |         ~2.42          |
-| **R²**   |          ~0.669           |         ~0.827         |
+| **MSE**  |          32.406           |         12.957         |
+| **RMSE** |           5.692           |         3.599          |
+| **MAE**  |           3.378           |         2.399          |
+| **R²**   |          0.558            |         0.823          |
 
-> *Values are approximate from typical runs with the given seeds/hyperparameters.*
+
 
 ### Training Loss Curves
 
