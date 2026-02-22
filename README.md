@@ -1,6 +1,6 @@
 # Zamin
 
-> *"Back to basics"* — Implementing regression algorithms from scratch with a pure, low-level approach, then comparing against neural network baselines.
+> *"Back to basics"* — Implementing various ML algorithms from scratch with a pure, low-level approach, and coparing them against each other.
 
 ## Overview
 
