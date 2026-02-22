@@ -1,9 +1,12 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import seaborn.objects as so
 from sklearn.model_selection import train_test_split  # Only for split
+
+os.makedirs('output/linearreg', exist_ok=True)
 
 # Load data
 column_names = ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT', 'MEDV']
@@ -80,7 +83,7 @@ plt.plot(losses, linewidth=2.5, color='steelblue')
 plt.title('GD Train Loss Convergence')
 plt.xlabel('Epochs')
 plt.ylabel('MSE')
-plt.savefig('gd_loss.png', dpi=300, bbox_inches='tight')
+plt.savefig('output/linearreg/gd_loss.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -89,5 +92,5 @@ ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', lw=2)
 ax.set_xlabel('True MEDV')
 ax.set_ylabel('Predicted MEDV')
 ax.set_title(f'Test Predictions (R²={test_metrics["R²"]:.3f})')
-plt.savefig('test_scatter.png', dpi=300, bbox_inches='tight')
+plt.savefig('output/linearreg/test_scatter.png', dpi=300, bbox_inches='tight')
 plt.show()
