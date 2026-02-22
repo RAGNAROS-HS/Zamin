@@ -42,24 +42,24 @@ This project explores **housing price prediction** on the Boston Housing dataset
 Histograms for all 14 variables in the dataset:
 
 <p align="center">
-  <img src="histograms/CRIM.png" width="24%"> <img src="histograms/ZN.png" width="24%"> <img src="histograms/INDUS.png" width="24%"> <img src="histograms/CHAS.png" width="24%">
+  <img src="output/dataanalysis/CRIM.png" width="24%"> <img src="output/dataanalysis/ZN.png" width="24%"> <img src="output/dataanalysis/INDUS.png" width="24%"> <img src="output/dataanalysis/CHAS.png" width="24%">
 </p>
 <p align="center">
-  <img src="histograms/NOX.png" width="24%"> <img src="histograms/RM.png" width="24%"> <img src="histograms/AGE.png" width="24%"> <img src="histograms/DIS.png" width="24%">
+  <img src="output/dataanalysis/NOX.png" width="24%"> <img src="output/dataanalysis/RM.png" width="24%"> <img src="output/dataanalysis/AGE.png" width="24%"> <img src="output/dataanalysis/DIS.png" width="24%">
 </p>
 <p align="center">
-  <img src="histograms/RAD.png" width="24%"> <img src="histograms/TAX.png" width="24%"> <img src="histograms/PTRATIO.png" width="24%"> <img src="histograms/B.png" width="24%">
+  <img src="output/dataanalysis/RAD.png" width="24%"> <img src="output/dataanalysis/TAX.png" width="24%"> <img src="output/dataanalysis/PTRATIO.png" width="24%"> <img src="output/dataanalysis/B.png" width="24%">
 </p>
 <p align="center">
-  <img src="histograms/LSTAT.png" width="24%"> <img src="histograms/MEDV.png" width="24%">
+  <img src="output/dataanalysis/LSTAT.png" width="24%"> <img src="output/dataanalysis/MEDV.png" width="24%">
 </p>
 
 ### Correlation Analysis
 
-|                                                   |                                                         |
-| :-----------------------------------------------: | :-----------------------------------------------------: |
-| ![Correlation Heatmap](heatMaps/corr_heatmap.png) | ![Correlation Clustermap](heatMaps/corr_clustermap.png) |
-|          *Standard correlation heatmap*           |        *Hierarchical clustered correlation map*         |
+|                                                              |                                                                    |
+| :----------------------------------------------------------: | :----------------------------------------------------------------: |
+| ![Correlation Heatmap](output/dataanalysis/corr_heatmap.png) | ![Correlation Clustermap](output/dataanalysis/corr_clustermap.png) |
+|                *Standard correlation heatmap*                |              *Hierarchical clustered correlation map*              |
 
 **Key correlations with MEDV (target):**
 - **Strong positive:** `RM` (rooms) — more rooms → higher price
@@ -119,28 +119,28 @@ Scaffolded in `EvolutionaryAlgorithm.py` — evolves neural network weights usin
 
 ### Metrics
 
-| Metric   | Gradient Descent (Linear) | Neural Network (Keras) |
-| -------- | :-----------------------: | :--------------------: |
-| **MSE**  |          32.406           |         12.957         |
-| **RMSE** |           5.692           |         3.599          |
-| **MAE**  |           3.378           |         2.399          |
-| **R²**   |          0.558            |         0.823          |
+| Metric   | Gradient Descent (Linear) | Neural Network (Keras) | Evolutionary Algorithm |
+| -------- | :-----------------------: | :--------------------: | :--------------------: |
+| **MSE**  |          32.406           |         12.957         |        101.712         |
+| **RMSE** |           5.692           |         3.599          |         10.085         |
+| **MAE**  |           3.378           |         2.399          |         7.748          |
+| **R²**   |           0.558           |         0.823          |         −0.387         |
 
 
 
 ### Training Loss Curves
 
-|                                                      |                                                                  |
-| :--------------------------------------------------: | :--------------------------------------------------------------: |
-|               ![GD Loss](gd_loss.png)                |                     ![NN Loss](nn_loss.png)                      |
-| *Gradient descent MSE convergence over ~1200 epochs* | *NN train/validation loss over ~50 epochs (with early stopping)* |
+|                                                      |                                                                  |                                              |
+| :--------------------------------------------------: | :--------------------------------------------------------------: | :------------------------------------------: |
+|       ![GD Loss](output/linearreg/gd_loss.png)       |                ![NN Loss](output/nn/nn_loss.png)                 |      ![EA Loss](output/ea/ea_loss.png)       |
+| *Gradient descent MSE convergence over ~1200 epochs* | *NN train/validation loss over ~50 epochs (with early stopping)* | *EA fitness convergence over 50 generations* |
 
 ### Test Set Predictions — Actual vs Predicted
 
-|                                 |                                    |
-| :-----------------------------: | :--------------------------------: |
-| ![GD Scatter](test_scatter.png) | ![NN Scatter](nn_test_scatter.png) |
-| *Gradient descent predictions*  |    *Neural network predictions*    |
+|                                                  |                                              |                                              |
+| :----------------------------------------------: | :------------------------------------------: | :------------------------------------------: |
+| ![GD Scatter](output/linearreg/test_scatter.png) | ![NN Scatter](output/nn/nn_test_scatter.png) | ![EA Scatter](output/ea/ea_test_scatter.png) |
+|          *Gradient descent predictions*          |         *Neural network predictions*         |     *Evolutionary algorithm predictions*     |
 
 Points closer to the red dashed line (y = x) indicate better predictions. The neural network shows tighter clustering around the ideal line, especially in the mid-range values.
 
@@ -151,20 +151,16 @@ Points closer to the red dashed line (y = x) indicate better predictions. The ne
 ```
 Zamin/
 ├── rawRun.py                 # Gradient descent linear regression (from scratch)
-├── EvolutionaryAlgorithm.py  # Neural network + evolutionary algorithm (WIP)
+├── NeuralNetwork.py          # Neural network with Keras/TensorFlow
+├── EvolutionaryAlgorithm.py  # Evolutionary algorithm for NN weight optimisation
 ├── dataPreProcess.py         # Dataset visualisation & correlation analysis
 ├── housing.csv               # Boston Housing dataset (506 × 14)
 ├── stickyNote.txt            # Project notes & core concepts
-├── histograms/               # Feature distribution plots (all 14 variables)
-├── heatMaps/                 # Correlation heatmap & clustermap
-├── boxPlots/                 # (Reserved for future box plot analysis)
-├── gd_loss.png               # GD training loss curve
-├── gd_loss_convergence.png   # GD loss convergence detail
-├── nn_loss.png               # NN train/val loss curve
-├── test_scatter.png          # GD actual vs predicted scatter
-├── nn_test_scatter.png       # NN actual vs predicted scatter
-├── nnmod1.keras              # Saved Keras model
-└── nnmod1.h5                 # Saved model (HDF5 format)
+└── output/
+    ├── dataanalysis/         # Histograms, heatmaps, correlation plots
+    ├── linearreg/            # GD loss curves & scatter plots
+    ├── nn/                   # NN loss curves, scatter plots & saved models
+    └── ea/                   # EA convergence & prediction plots
 ```
 
 ---
