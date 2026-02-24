@@ -213,8 +213,4 @@ Zamin/
 - Writing gradient descent from scratch solidifies the fundamentals: the update rule, loss surfaces, and convergence behaviour become tangible rather than abstract.
 
 ## Future Work
-
-- **Feature engineering** — polynomial features, interaction terms, or log transforms to improve linear regression.
-- **Hyperparameter tuning** for the EA — larger populations, more generations, adaptive mutation rates.
-- **Additional models** — Ridge/Lasso regression, Random Forest, or XGBoost for comparison.
-- **Cross-validation** — replace the single 80/20 split with k-fold CV for more robust evaluation.
+Lots of things could be improved, first and foremost add ridge regression to the linear algorithm, for the NN - add pruning. These are nice but most of all I will be looking to implement these onto a more sophisticated and real-world dataset. This project was great for the rapid feedback loop and small scale. Ramping up to something more fully fledged is the next step. Definitely more to come.
