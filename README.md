@@ -1,6 +1,6 @@
 # Zamin
 
-> *"Back to basics"* — Implementing various ML algorithms from scratch with a pure, low-level approach, and coparing them against each other.
+> *"Back to basics"* — Implementing various ML algorithms from scratch with a pure, low-level approach, and comparing them against each other.
 
 ## Overview
 
@@ -87,7 +87,7 @@ w -= α * dw
 b -= α * db
 ```
 
-### 2. Neural Network — Keras/TensorFlow (`EvolutionaryAlgorithm.py`)
+### 2. Neural Network — Keras/TensorFlow (`NeuralNetwork.py`)
 
 A **3-hidden-layer** dense network trained with Adam optimiser:
 
@@ -104,14 +104,14 @@ A **3-hidden-layer** dense network trained with Adam optimiser:
 - **Loss:** MSE
 - **Batch size:** 32, **Epochs:** 50 (with early stopping, patience=20)
 
-### 3. Evolutionary Algorithm (Work in Progress)
+### 3. Evolutionary Algorithm (`EvolutionaryAlgorithm.py`)
 
-Scaffolded in `EvolutionaryAlgorithm.py` — evolves neural network weights using:
+Evolves the same neural network architecture's weights using a genetic algorithm instead of backpropagation:
 - **Tournament selection** (k=3)
 - **Gaussian mutation** (per-gene with configurable rate and sigma)
 - **Uniform crossover** (per-gene swap with configurable rate)
-
-> ⚠️ **Status:** Skeleton implemented — `fitness()`, `ea_training_loop()`, and `mutation()` functions are stubbed and awaiting completion.
+- **Elitism** (top 2 individuals preserved each generation)
+- **Hyperparameters:** `population_size=100`, `epochs=50`, `mutation_rate=0.1`, `sigma=0.3`, `crossover_rate=0.5`
 
 ---
 
@@ -146,6 +146,46 @@ Points closer to the red dashed line (y = x) indicate better predictions. The ne
 
 ---
 
+## Requirements
+
+- Python 3.10+
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- scikit-learn
+- TensorFlow / Keras
+
+Install all dependencies:
+
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn tensorflow
+```
+
+---
+
+## How to Run
+
+Each script is self-contained and can be run independently:
+
+```bash
+# Data exploration & correlation plots
+python dataPreProcess.py
+
+# Gradient descent linear regression
+python rawRun.py
+
+# Neural network (Keras/TensorFlow)
+python NeuralNetwork.py
+
+# Evolutionary algorithm
+python EvolutionaryAlgorithm.py
+```
+
+All outputs (plots, saved models) are written to the `output/` directory.
+
+---
+
 ## Project Structure
 
 ```
@@ -158,17 +198,23 @@ Zamin/
 ├── stickyNote.txt            # Project notes & core concepts
 └── output/
     ├── dataanalysis/         # Histograms, heatmaps, correlation plots
-    ├── linearreg/            # GD loss curves & scatter plots
-    ├── nn/                   # NN loss curves, scatter plots & saved models
-    └── ea/                   # EA convergence & prediction plots
+    ├── linearreg/            # GD loss curve & test scatter plot
+    ├── nn/                   # NN loss curve, scatter plot & saved models (.keras, .h5)
+    └── ea/                   # EA convergence curve & test scatter plot
 ```
 
 ---
 
 ## Key Takeaways
 
-redacted
+- **Linear regression** provides a solid baseline (R² ≈ 0.56) but cannot capture non-linear relationships in the data.
+- **Neural networks** significantly outperform linear regression (R² ≈ 0.82), demonstrating the benefit of non-linear modelling even on small datasets.
+- **Evolutionary algorithms** underperform gradient-based training (R² < 0) on this problem — random search over 1,343 parameters is far less sample-efficient than backpropagation, especially with only 50 generations.
+- Writing gradient descent from scratch solidifies the fundamentals: the update rule, loss surfaces, and convergence behaviour become tangible rather than abstract.
 
 ## Future Work
 
-redacted
+- **Feature engineering** — polynomial features, interaction terms, or log transforms to improve linear regression.
+- **Hyperparameter tuning** for the EA — larger populations, more generations, adaptive mutation rates.
+- **Additional models** — Ridge/Lasso regression, Random Forest, or XGBoost for comparison.
+- **Cross-validation** — replace the single 80/20 split with k-fold CV for more robust evaluation.
